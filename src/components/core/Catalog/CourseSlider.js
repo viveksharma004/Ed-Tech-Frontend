@@ -6,11 +6,11 @@ import "swiper/css/free-mode"
 import "swiper/css/pagination"
 import { FreeMode, Pagination}  from 'swiper/modules'
 
-import Course_Card from './Course_Card'
+import CourseCard from './CourseCard'
 
 const CourseSlider = ({Courses}) => {
   return (
-    <>
+    <div className='mx-auto w-full'>
       {Courses?.length ? (
         <Swiper
           slidesPerView={1}
@@ -19,22 +19,28 @@ const CourseSlider = ({Courses}) => {
           modules={[FreeMode, Pagination]}
           breakpoints={{
             1024: {
-              slidesPerView: 3,
+              slidesPerView: 3
             },
+            760:{
+              slidesPerView:2
+            },
+            390:{
+              slidesPerView:1
+            }
           }}
           className="max-h-[30rem]"
         >
           {Courses?.map((course, i) => (
-            <SwiperSlide key={i}>
+            <SwiperSlide key={i} className='mx-auto'>
               {/* // eslint-disable-next-line */}
-              <Course_Card course={course} Height={"h-[250px]"} />
+              <CourseCard course={course} Height={"h-[250px] w-full"} />
             </SwiperSlide>
           ))}
         </Swiper>
       ) : (
         <p className="text-xl text-richblack-5">No Course Found</p>
       )}
-    </>
+    </div>
   )
 }
 

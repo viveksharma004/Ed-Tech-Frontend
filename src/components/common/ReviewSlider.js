@@ -92,7 +92,7 @@ function ReviewSlider() {
                       value={review.rating}
                       size={20}
                       edit={false}
-                      activeColor="#ffd700"
+                      activeColor={"#ffd700"}
                       emptyIcon={<FaStar />}
                       fullIcon={<FaStar />}
                     />
