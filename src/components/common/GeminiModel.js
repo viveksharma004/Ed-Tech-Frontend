@@ -7,8 +7,7 @@ import {  RxCross1 } from "react-icons/rx";
 export default function GeminiModel({geminiHandler}) {
 
 
-  const [response, setResponse] = useState("I need more information to understand what you want me to do with the input vivek.Is Vivek a user of the website?  Is he a tutor? A student?  Do you want me to look up information about him?  Please provide more context. I need more information to understand what you want me to do with the input vivek.Is Vivek a user of the website?  Is he a tutor? A student?  Do you want me to look up information about him?  Please provide more context.");
-  const [value, setValue] = useState("");
+  const [response, setResponse] = useState("");
   // const [response, setResponse] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -26,7 +25,8 @@ export default function GeminiModel({geminiHandler}) {
         },
       };
 
-      const response = await fetch("http://localhost:8000/gemini", options);
+      // const response = await fetch("http://localhost:8000/gemini", options);
+      const response = await fetch("https://chat-assistant-model.onrender.com/gemini", options);
       const data = await response.json();
       // console.log(data.response);
       setResponse(data.response);
