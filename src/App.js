@@ -30,7 +30,7 @@ import Instructor from './components/core/DashboardPage/InstructorDashboard/Inst
 // import { useEffect } from 'react';
 // import { setUser } from './slices/profileSlice';
 import GeminiModel from './components/common/GeminiModel';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 
 
@@ -40,6 +40,11 @@ function App() {
   const geminiHandler=()=>{
     setGeminiModal(!geminiModal);
   }
+  useEffect(()=>{
+    setTimeout(() => {
+      setGeminiModal(true);
+    }, 7000); 
+  },[]);
   const {user}=useSelector((state)=>state.profile);
   // console.log("Logging user from app",user)
   // const dispatch = useDispatch(); 
@@ -118,7 +123,7 @@ function App() {
          </div>
         <div className={`fixed right-10 bottom-10 w-[45px] h-[45px] z-9 text-richblack-700 font-bold font-edu-sa bg-yellow-50 rounded-full 
         flex justify-center items-center`} onClick={geminiHandler}>AI</div></>}
-        <div className='fixed right-8 bottom-8 z-10'>{geminiModal && <GeminiModel geminiHandler={geminiHandler} />}</div>
+        <div className='fixed right-8 bottom-8 z-50'>{geminiModal && <GeminiModel geminiHandler={geminiHandler} />}</div>
     </div>
   );
 }

@@ -5,7 +5,7 @@ import  apiConnector  from '../services/apiConnector';
 import { categories } from '../services/api';
 import { getCatalogPageData } from '../services/operations/pageAndComponentData';
 // eslint-disable-next-line
-import Course_Card from '../components/core/Catalog/Course_Card';
+import CourseCard from '../components/core/Catalog/CourseCard';
 import CourseSlider from '../components/core/Catalog/CourseSlider';
 import { useSelector } from "react-redux"
 import Error from "./Error"
@@ -22,12 +22,14 @@ const Catalog = () => {
     //Fetch all categories
     useEffect(()=> {
         const getCategories = async() => {
+          try{
             const res = await apiConnector("GET", categories.CATEGORIES_API);
             console.log(res)
             const category_id = 
             res?.data?.allCategories?.filter((ct) => ct.name.split(" ").join("-").toLowerCase() === catalogName)[0]._id;
             setCategoryId(category_id);
-            console.log("Category got from frontend and backend match :", category_id);
+            // console.log("Category got from frontend and backend match :", category_id);
+          }catch(err){console.log(err)}
         }
         getCategories();
     },[catalogName]);
@@ -37,7 +39,7 @@ const Catalog = () => {
           // setLoading(true);
             try{
                 const res = await getCatalogPageData(categoryId);
-                console.log("PRinting res: ", res);
+                // console.log("PRinting res: ", res);
                 setCatalogPageData(res);
             }
             catch(error) {
@@ -108,14 +110,14 @@ const Catalog = () => {
                 New
               </p>
             </div>
-            <div>
+            <div className='mx-auto'>
               <CourseSlider
                 Courses={catalogPageData?.data?.selectedCategory?.course}
               />
             </div>
           </div>
           {/* Section 2 */}
-          <div className=" mx-auto box-content w-full max-w-maxContentTab px-4 py-12 lg:max-w-maxContent">
+          <div className="mx-auto box-content w-full max-w-maxContentTab px-4 py-12 lg:max-w-maxContent">
             <div className="section_heading">
               Top courses in {catalogPageData?.data?.differentCategory?.name}
             </div>
@@ -135,7 +137,7 @@ const Catalog = () => {
                   ?.slice(0, 4)
                   .map((course, i) => (
                     // eslint-disable-next-line
-                    <Course_Card course={course} key={i} Height={"h-[400px]"} />
+                    <CourseCard course={course} key={i} Height={"h-[400px]"} />
                   ))}
               </div>
             </div>
